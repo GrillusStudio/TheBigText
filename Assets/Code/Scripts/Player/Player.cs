@@ -20,15 +20,34 @@ namespace Player
             }
             set
             {
-                _chareaterSprite = value;
+                if (value > PlayerData.Sprites.Count - 1)
+                {
+                    Debug.LogWarning("Sprite Poza Zakresem");
+                }
+                else
+                {
+                    _chareaterSprite = value;
+                }
+                UpdateModel();
             }
         }
 
-        [Button]
         public void UpdateModel()
         {
             _model.sprite = PlayerData.Sprites[CharacterSprite];
         }
+
+        #region Test metody
+
+        public int newModelNumber;
+
+        [Button("Update Model", EButtonEnableMode.Playmode)]
+        public void TestUpdateModel()
+        {
+            CharacterSprite = newModelNumber;
+        }
+
+        #endregion Test metody
 
     }
 }
